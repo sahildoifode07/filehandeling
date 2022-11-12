@@ -1,0 +1,83 @@
+while True:
+    print("welcome to Customer portal")
+    print("1. Add New Customer")
+    print("2. Delete customer")
+    print("3. Update customer")
+    print("4. Search Customer")
+    print("5. Show all customer")
+    print("6. Exit")
+    print()
+
+        
+    def add():
+        cid=input("Cutomer Id:- ")
+        nm=input("Customer Name:- ")
+        ad=input("Customer address:- ")
+        cn=input("Cutomer Contact Number:- ")
+        
+        f=open("customer.txt","a")
+        f.write(cid+"\t")
+        f.write(nm+"\t")
+        f.write(ad+"\t")
+        f.write(cn+"\n")
+        print()
+        print("Record added")
+        f.close()
+        
+    def delete():
+        i=input("Enter the ID to remove from file:- ")
+        #ID number started from 101 & infinity
+        with open("customer.txt","r") as f:
+            all=f.readlines()
+            #print(data)
+        with open("customer.txt","w") as f:
+            for data in all:
+                d=data.split("\t",1)
+                if(d[0]!=i):
+                    f.writelines(data)
+        print("Record deleted")
+        
+    def update():
+        i=input("Enter the ID to be updated from file:- ")
+        with open("customer.txt","r") as f:
+            all=f.readlines()
+        with open("customer.txt","w") as f:
+            for data in all:
+                d=data.split("\t",1)
+                if(d[0]==i):
+                    nn=input("New customer Name:- ")
+                    na=input("New cutomer Address:- ")
+                    nc=input("New customer Contact:- ")
+                    f.writelines(d[0]+"\t"+nn+"\t"+na+"\t"+nc+"\n")
+                else:
+                    f.writelines(data)
+                    print()
+                    print("Record Updated") 
+    def search():
+        i=input("Enter the ID to be searched from file")
+        with open("customer.txt","r") as f:
+            all=f.readlines()
+            for data in all:
+                d=data.split("\t",1)
+                if(d[0]==i):
+                    print(data)
+    
+    def show():
+        f=open("customer.txt","r")
+        print("ID \t Name \t Address \t Contact no")
+        print(f.read())
+        f.close()
+    print()    
+    ch=int(input("Enter your choice:- "))
+    if ch==1:
+        add()
+    if ch==2:
+        delete()
+    if ch==3:
+        update()
+    if ch==4:
+        search()
+    if ch==5:
+        show()
+    if ch==6:
+        break 
